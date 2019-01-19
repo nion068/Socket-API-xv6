@@ -4,6 +4,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "sock.h"
 #include "x86.h"
 
 static void startothers(void);
@@ -27,10 +28,11 @@ main(void)
   consoleinit();   // console hardware
   uartinit();      // serial port
   pinit();         // process table
+  sinit();         // socket table
   tvinit();        // trap vectors
   binit();         // buffer cache
   fileinit();      // file table
-  ideinit();       // disk 
+  ideinit();       // disk
   startothers();   // start other processors
   kinit2(P2V(4*1024*1024), P2V(PHYSTOP)); // must come after startothers()
   userinit();      // first user process
